@@ -1,0 +1,541 @@
+
+Code 1 : Structure Implementation using Array .
+
+#include<stdio.h>
+struct Student{
+  int id;
+  float cgpa;
+};
+int main()
+{
+   struct Student studentinfo[5];
+   int i;
+   for(i=0;i<5;i++)
+   {
+      printf("Enter student-%d info\n",i+1);
+      scanf("%d",&studentinfo[i].id);
+      scanf("%f",&studentinfo[i].cgpa);
+   }
+   for(i=0;i<5;i++)
+   {
+      printf("\nDisplay student-%d info : \n",i+1);
+      printf("ID : %d\t",studentinfo[i].id);
+      printf("CGPA : %.2f\n",studentinfo[i].cgpa);
+   }
+   return 0;
+}
+
+
+Code 2 : Create and Display LinkedList  .
+
+#include <stdio.h>
+#include <stdlib.h>
+void createlinkedlist(int n);
+void display();
+
+struct node{
+    int data;
+    struct node *next;
+}*head;
+
+int main()
+{
+    int n;
+    printf("Enter the number of nodes in linked list\n");
+    scanf("%d", &n);
+    createlinkedlist(n);
+    display();
+}
+
+void createlinkedlist(int n){
+    struct node *newnode, *currentnode;
+    int value, i;
+    head = (struct node*) malloc(sizeof(struct node));
+    printf("Enter the value you want to save in first node\n");
+    scanf("%d", &value);
+    head->data=value;
+    head->next=NULL;
+    currentnode=head;
+    for(i=1;i<n;i++){
+        newnode = (struct node*) malloc(sizeof(struct node));
+        printf("Enter the value of node-%d\n", i+1);
+        scanf("%d", &value);
+        newnode->data=value;
+        newnode->next=NULL;
+        currentnode->next=newnode;
+        currentnode=newnode;
+    }
+}
+
+void display(){
+    struct node *currentnode;
+    currentnode=head;
+    printf("Output is:\n");
+    while(currentnode!=NULL)
+    {
+        printf("%d\t", currentnode->data);
+        currentnode=currentnode->next;
+    }
+}
+
+Code 3 : Linked list Insertion .
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+}*head;
+
+void InsertAtBeginning();
+void InsertAtEnd();
+void InsertAtMid(int position);
+
+void InsertAtBeginning()
+{
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\n\nEnter the value you want to insert at the beginning of the linked list\n");
+    scanf("%d",&newnode->data);
+    newnode->next=head;
+    head=newnode;
+}
+void InsertAtMid(int position)
+{
+    struct node* current,*newnode;
+    int i;
+    current=head;
+    for(i=1;i<position-1;i++)
+        current=current->next;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\n\nEnter the value you want to insert in the linked list\n");
+    scanf("%d",&newnode->data);
+    newnode->next=current->next;
+    current->next=newnode;
+}
+
+void InsertAtEnd()
+{
+    struct node* current,*newnode;
+    current=head;
+    while(current->next!=NULL)
+        current=current->next;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\n\nEnter the value you want to insert at the end of the linked list\n");
+    scanf("%d",&newnode->data);
+    newnode->next=NULL;
+    current->next=newnode;
+}
+
+
+
+
+
+Code 4 : Linked List Deletion .
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+}*head;
+
+void DeleteFromBeginning();
+void DeleteFromEnd();
+void DeleteFromMid(int position);
+
+void DeleteFromBeginning()
+{
+    struct node*current;
+    current=head;
+    head=head->next;
+    free(current);
+}
+
+void DeleteFromMid(int position)
+{
+    struct node* current,*previous;
+    int i;
+    current=head;
+    for(i=1;i<position;i++)
+    {
+        previous=current;
+        current=current->next;
+    }
+    previous->next=current->next;
+    free(current);
+}
+
+void DeleteFromEnd()
+{
+    struct node *current,*previous;
+    current=head;
+    while(current->next!=NULL)
+    {
+        previous=current;
+        current=current->next;
+    }
+    free(current);
+    previous->next=NULL;
+}
+
+
+
+
+
+Code 5 : Search an item in Linked List .
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+}*head;
+void searching(int searchitem);
+
+int main()
+{
+    int n,position,value;
+    printf("Enter the number of input\n");
+    scanf("%d",&n);
+    createlist(n);
+    printf("\n\nData in the list are\n");
+    displaylist();
+    printf("Enter the value you want to search\n");
+    scanf("%d",&value);
+    searching(value);
+    return 0;
+}
+void searching(int searchitem)
+{
+    int i=0;
+    struct node* current;
+    current=head;
+    while(current!=NULL)
+    {
+        if(current->data==searchitem)
+        {
+            printf("Search item is found");
+            break;
+        }
+        else
+        {
+          current=current->next;
+        }
+    }
+    if(current==NULL)
+    {
+        printf("Search item not found");
+    }
+}
+
+Code 6 : Count Item in Linked List.
+
+#include <stdio.h>
+#include <stdlib.h>
+void count();
+struct node{
+    int data;
+    struct node *next;
+}*head;
+
+int main()
+{
+    int n;
+    printf("Enter the number of nodes in linked list : ");
+    scanf("%d", &n);
+    count();
+    }
+
+void count(){
+    int count =0;
+    struct node *currentnode;
+    currentnode=head;
+    //printf("Output is:\n");
+    while(currentnode!=NULL)
+    {
+       // printf("%d\t", currentnode->data);
+        count++;
+        currentnode=currentnode->next;
+    }
+    //printf("\n");
+    printf("\ntotal nodes are:%d\n",count);
+}
+
+
+
+
+
+Code 7 : Stack Implementation using Array .
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int stack[10], top=-1, val, i, n, j;
+void push()
+{
+    if(top==n)
+    {
+        printf("Stack Overflow");
+    }
+    else{
+        top = top+1;
+        printf("Enter the value: ");
+        scanf("%d", &val);
+        stack[top] = val;
+    }
+}
+
+void pop(){
+    if(top==-1)
+    {
+        printf("Stack underflow");
+    }
+    else{
+        top = top-1;
+    }
+}
+
+void display()
+{
+    for(i=top; i>=0; i--)
+    {
+        printf("%d\n", stack[i]);
+    }
+}
+
+int main()
+{
+    char ch;
+    printf("Enter the number of elements in stack: ");
+    scanf("%d", &n);
+    printf("Operations choice\n1. Push Operation\n2. Pop Operation\n3. Display Operation\n");
+    do{
+        printf("Enter your choice: \n");
+        scanf("%d", &j);
+        switch(j){
+           case 1:
+              push();
+              break;
+           case 2:
+              pop();
+              break;
+           case 3:
+              display();
+              break;
+           default:
+              printf("Enter right choice");
+        }
+    printf("If you don't want to continue the press n");
+    ch = getch();
+    }while(ch!='n');
+    return 0;
+}
+
+Code 8 : Stack Implementation using Linked List .
+1.	Push :
+void StackPush()
+{
+    struct node *newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\n\nEnter the value you want to insert at the beginning of the linked list\n");
+    scanf("%d",&newnode->data);
+    newnode->next=head;
+    head=newnode;
+}
+2.	POP :
+void StackPop()
+{
+    struct node*current;
+    current=head;
+    head=head->next;
+    free(current);   }
+Code 9 : Queue Implementation using Linked List .
+
+1.	Enqueue :
+
+void Enqueue()
+{
+    struct node* current,*newnode;
+    current=head;
+    while(current->next!=NULL)
+        current=current->next;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("\n\nEnter the value you want to insert at the end of the linked list\n");
+    scanf("%d",&newnode->data);
+    newnode->next=NULL;
+    current->next=newnode;
+}
+
+2.	Dequeue :
+
+void Dequeue ()
+{
+    struct node*current;
+    current=head;
+    head=head->next;
+    free(current);
+}
+
+
+
+Code 10 : Linear Search Code.
+
+#include <stdio.h>
+int main() {
+  int array[10] , n ,searchitem;
+printf(“enter the number of element in array \n);
+scanf(“%d”,&n);
+ LinearSearch(array, n, searchitem);
+}
+Void LinearSearch(int array[], int n, int sreachitem)
+{
+Int i, flag =0;
+  for (int i = 0; i < n; i++)
+{
+    if (array[i] == sreachitem)
+      {
+        flag=1;
+        printf(“Found!”);
+        break;
+      }
+    }
+If(flag==0)
+printf(“not found!”);
+}
+
+
+
+Code 11 : Binary Search Code.
+
+#include <stdio.h>
+#include <stdio.h>
+int main() {
+  int array[10] , n ,searchitem;
+printf(“enter the number of element in array \n);
+scanf(“%d”,&n);
+ LinearSearch(array, n, searchitem);
+}
+Void binarySearch(int array[], int searchitem, int LI, int HI)
+ {
+  if (HI >= LI) {
+    int mid =( LI+HI ) / 2;
+    if (array[mid] == searchitem)
+      printf(“Found”);
+    else if (array[mid] > x)
+      return binarySearch(array, searchitem, LI, mid - 1);
+    else
+    return binarySearch(array, searchitem, mid + 1, HI);
+  }
+  else
+Printf(“NOT FOUND”):
+}
+
+
+
+Code 12 : Selection Sort .
+
+#include <stdio.h>
+void selectionSort(int array[], int size)
+{
+  for (int i = 0; i < size - 1; i++)
+ {
+    int min = I ;
+    for (int j = i + 1; i < size; j++)
+   {
+      if (array[j] < array[min])
+      {
+        min  = j ;
+      }
+     else if  (min!= i)
+     {
+     temp = array[i];
+      array[i]=array[min];
+       array[min]=temp;
+    }
+   }
+}
+
+
+
+
+
+Code 13 : Insertion Sort .
+
+#include <stdio.h>
+int main() {
+   int i, size ;
+    printf(“Enter the number of elements in array\n”);
+   scanf(“%d”,&n);
+   insertionSort(array, size);
+}
+void insertionSort(int array[], int size) {
+  for (int i = 1;i < size; i++) {
+    int key = array[i];
+    int j = i - 1;
+    while (key < array[j] && j >= 0) {
+      array[ j + 1 ] = array[j];
+      --j;
+    }
+    array[j + 1] = key;
+  }
+}
+
+
+
+
+
+Code 14 : Merge Sort .
+
+#include <stdio.h>
+
+void merge(int arr[], int p, int q, int r)
+{
+  int n1 = q - p + 1;
+  int n2 = r - q;
+  int L[n1], R[n2];
+
+  for (int i = 0; i < n1; i++)
+    L[i] = arr[p + i];
+  for (int j = 0; j < n2; j++)
+    R[j] = arr[q + 1 + j];
+
+  int i, j, k;
+  i = 0;
+  j = 0;
+  k = p;
+  while (i < n1 && j < n2) {
+    if (L[i] <= R[j]) {
+      arr[k] = L[i];
+     i++;
+    }
+Else
+   {
+      arr[k] = R[j];
+      j++;
+    }
+    k++;
+  }
+  while (i < n1) {
+    arr[k] = L[i];
+    i++;
+    k++;
+  }
+  while (j < n2) {
+    arr[k] = R[j];
+    j++;
+    k++;
+  }
+}
+void mergeSort(int arr[], int LI, int HI) {
+  if (LI < HI)
+{
+    int mid = LI +( HI-1 )/ 2;
+    mergeSort(arr, LI, HI);
+    mergeSort(arr, mid + 1, HI);
+    merge(arr, LI, mid, HI);
+  }
+}
